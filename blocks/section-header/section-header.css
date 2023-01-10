@@ -1,3 +1,27 @@
 .section-header {
   margin: 45px 200px 37px 200px;
 }
+
+@media (max-width: 1024px) {
+  .section-header {
+    margin: 45px 150px 37px 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-header {
+    margin: 45px 100px 37px 100px;
+  }
+}
+
+@media (max-width: 544px) {
+  .section-header {
+    margin: 45px 50px 37px 50px;
+  }
+}
+
+@media (max-width: 320px) {
+  .section-header {
+    margin: 28px 0 37px 0;
+  }
+}
