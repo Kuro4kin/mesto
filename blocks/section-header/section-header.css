@@ -1,8 +1,8 @@
 .section-header {
-  margin: 45px 200px 37px 200px;
+  margin: 45px 200px 40px 200px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1048px) {
   .section-header {
     margin: 45px 150px 37px 150px;
   }
