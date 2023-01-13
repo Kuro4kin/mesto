@@ -1,0 +1,26 @@
+@import url(../vendor/normalize.css);
+@import url(../vendor/inter.css);
+@import url(../blocks/root/root.css);
+@import url(../blocks/page-wrapper/page-wrapper.css);
+@import url(../blocks/section-header/section-header.css);
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/header__logo/header__logo.css);
+@import url(../blocks/section-profile/section-profile.css);
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__container/profile__container.css);
+@import url(../blocks/profile/__image/profile__image.css);
+@import url(../blocks/profile/__information/profile__information.css);
+@import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/profile/__edit-button/profile__edit-button.css);
+@import url(../blocks/profile/__job/profile__job.css);
+@import url(../blocks/profile/__add-button/profile__add-button.css);
+@import url(../blocks/section-elements/section-elements.css);
+@import url(../blocks/elements/elements.css);
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__image/card__image.css);
+@import url(../blocks/card/__item/card__item.css);
+@import url(../blocks/card/__title/card__title.css);
+@import url(../blocks/card/__button-like/card__button-like.css);
+
+
+
