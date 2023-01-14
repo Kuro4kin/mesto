@@ -27,7 +27,7 @@
           <ul class="elements">
             <li class="card">
               <img class="card__image" src="./images/Karachaevsk-1.png">
-              <div class="card__item">
+              <div class="card__item">               
                 <h2 class="card__title">
                   Карачаевск
                 </h2>
@@ -82,9 +82,20 @@
           </ul>
         </section>
       </content>
-      <footer class="footer">
-        <p class="footer__copyright">@Mesto Russia</p>
+      <footer class="footer section-footer">
+        <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
       </footer>
+      <div class="popup popup_oened">
+        <div class="popup__wrapper">
+          <button class="popup__close-button"></button>
+          <div class="popup__container">
+            <h2 class="poput__title">Редактировать профиль</h2>
+            <input id="name" type="text" class="popup__input popup__input_name" value="Жак-Ив Кусто" alt="Поле ввода инени">
+            <input id="job" type="text" class="popup__input popup__input_job" value="Исследователь океана" alt="Поле ввода занятия">
+            <button type="submit" class="poput__save-button">Сохранить</button>
+          </div>
+        </div>
+      </div>
   </div>
 </body>
 </html>
