@@ -12,7 +12,7 @@ const closeEditButton = popupOpened.querySelector('.popup__close-button');
 
 function closeModal(){
   popupOpened.classList.remove('popup_opened')
-}
+};
 
 closeEditButton.addEventListener('click', closeModal);
 
@@ -38,6 +38,6 @@ function handleFormSubmit(evt) {
     jobProfile.textContent = (`${jobInput.value}`)
   } else {jobInput.value = jobProfile.innerText}
   closeModal()
-}
+};
 
 formElement.addEventListener('submit', handleFormSubmit);
