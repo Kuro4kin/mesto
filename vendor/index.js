@@ -16,8 +16,6 @@ function closeModal(){
 
 closeEditButton.addEventListener('click', closeModal);
 
-const saveEditButton = popupOpened.querySelector('.poput__save-button');
-
 const nameProfile = profile.querySelector('.profile__name');
 
 const jobProfile = profile.querySelector('.profile__job');
