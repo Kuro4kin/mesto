@@ -14,6 +14,7 @@
 
 @media (max-width: 962px) {
   .profile__job {
+    max-width: 200px;
     font-size: 14px;
   }
 }
