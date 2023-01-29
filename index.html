@@ -25,60 +25,6 @@
         </section>
         <section class="section-elements">
           <ul class="elements">
-            <li class="card">
-              <img class="card__image" src="./images/Karachaevsk.png" alt="Старинное строение на фоне горы с деревьями">
-              <div class="card__item">
-                <h2 class="card__title">
-                  Карачаевск
-                </h2>
-                <button type="button" class="card__button-like "></button>
-              </div>
-            </li>
-            <li class="card">
-              <img class="card__image" src="./images/Elbrus.png" alt="Силует горы на горизонте на фоне рассвета">
-              <div class="card__item">
-                <h2 class="card__title">
-                  Гора Эльбрус
-                </h2>
-                <button type="button" class="card__button-like"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img class="card__image" src="./images/Dombai.png" alt="Гряда горных вершин позади леса">
-              <div class="card__item">
-                <h2 class="card__title">
-                  Домбай
-                </h2>
-                <button type="button" class="card__button-like"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img class="card__image" src="./images/Bogdo.png" alt="Холм из глины извястника и соли и тропа к нему">
-              <div class="card__item">
-                <h2 class="card__title">
-                  Гора Большое Богдо
-                </h2>
-                <button type="button" class="card__button-like card__button-like"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img class="card__image" src="./images/Baskunchak.png" alt="Деревянные пни на солевой разработке">
-              <div class="card__item">
-                <h2 class="card__title">
-                  Баскунчак
-                </h2>
-                <button type="button" class="card__button-like"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img class="card__image" src="./images/Rostov-na-Donu.png" alt="Городские джунгли в Ростовской публичной библиотеке">
-              <div class="card__item">
-                <h2 class="card__title">
-                  Ростов-на-Дону
-                </h2>
-                <button type="button" class="card__button-like"></button>
-              </div>
-            </li>
           </ul>
         </section>
       </main>
@@ -96,7 +42,35 @@
           </form>
         </div>
       </div>
-  </div>
+      <div class="popup popup_type_add-card">
+        <div class="popup__container">
+          <button type="button" class="popup__close-button"></button>
+          <h2 class="popup__title">Новое место</h2>
+          <form name="card-add" method="get" action="#" class="popup__form">
+            <input name="card-title" type="text" class="popup__input popup__input_type_card-title" placeholder="Название" value="">
+            <input name="card-image-link" type="text" class="popup__input popup__input_type_card-img-link" placeholder="Ссылка на картинку" value="">
+            <button type="submit" class="popup__save-button">Создать</button>
+          </form>
+        </div>
+      </div>
+      <div class="popup popup_type_image-view">
+        <div class="popup__wrapper-image">
+          <button type="button" class="popup__close-button"></button>
+          <img class="popup__image" src="" alt="">
+          <p class = "popup__subtitle"></p>
+        </div>
+      </div>
+  <template id="card-template">
+    <li class="card">
+      <button type="button"  class="card__button-delete"></button>
+      <img class="card__image" alt="">
+      <div class="card__item">               
+        <h2 class="card__title">
+        </h2>
+        <button class="card__button-like"></button>
+      </div>
+    </li>
+  </template>
   <script src="./scripts/index.js"></script>
 </body>
 </html>
