@@ -45,7 +45,7 @@ const renderCardsInfo = [
 
 const template = document.querySelector('#card-template').content;
 
-const cardTemplate = template.querySelector('.card')
+const cardTemplate = template.querySelector('.card');
 
 const cardPlaceContainer = document.querySelector('.elements');
 
@@ -69,14 +69,14 @@ const modalSubtitle = imageViewPopup.querySelector('.popup__subtitle');
 
 const closeImageViewPopupButton = imageViewPopup.querySelector('.popup__close-button');
 
-function cardDelete(cardElement) {
+function setCardDelete(cardElement) {
   const cardDeleteButton = cardElement.querySelector('.card__button-delete');
   cardDeleteButton.addEventListener('click', function() {
     cardDeleteButton.closest('.card').remove();
   })
 };
 
-function cardLike(cardElement) {
+function setCardLike(cardElement) {
   const cardLikeButton = cardElement.querySelector('.card__button-like');
   cardLikeButton.addEventListener('click', function() {
     cardLikeButton.classList.toggle('card__button-like_active');
@@ -91,34 +91,33 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 };
 
-function editProfile() {
+function openProfilePopup() {
   openPopup(profilePopup);
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
 };
 
-function addNewCard() {
+function openCardPopup() {
   openPopup(cardPopup);
 };
 
-function setImageClickHandler(cardElement) {
-  const cardImage = cardElement.querySelector('.card__image');
-  cardImage.addEventListener('click', function(evt) {
-    modalImg.src = evt.target.src;
-    modalImg.alt = `Фотография из места ${evt.target.nextElementSibling.firstElementChild.textContent}`;
-    modalSubtitle.textContent = evt.target.nextElementSibling.firstElementChild.textContent;
-    openPopup(imageViewPopup);
-    })
-};
+function setImageClickHandler(placeImgLink, placeName) {
+  modalImg.src = placeImgLink;
+  modalImg.alt = `Фотография из места ${placeName}`;
+  modalSubtitle.textContent = placeName;
+  openPopup(imageViewPopup);
+  };
 
 function createCard(placeImgLink, placeName) {
   const cardElement = cardTemplate.cloneNode(true);
-  cardElement.querySelector('.card__image').src = placeImgLink;
-  cardElement.querySelector('.card__image').alt = `Фотография из места ${placeName}`;
-  cardElement.querySelector('.card__title').textContent = placeName;
-  cardDelete(cardElement);
-  cardLike(cardElement);
-  setImageClickHandler(cardElement);
+  const cardImageElement = cardElement.querySelector('.card__image');
+  const cardTitleElement = cardElement.querySelector('.card__title');
+  cardImageElement.src = placeImgLink;
+  cardImageElement.alt = `Фотография из места ${placeName}`;
+  cardTitleElement.textContent = placeName;
+  setCardDelete(cardElement);
+  setCardLike(cardElement);
+  cardImageElement.addEventListener('click', () => setImageClickHandler(placeImgLink, placeName));
   return cardElement;
 }
 
@@ -131,11 +130,11 @@ function renderCards() {
 
 renderCards();
 
-function handleProfileFormSubmit(evt) { 
+function handleProfileFormSubmit(evt) {
   evt.preventDefault(); 
   nameProfile.textContent = nameInput.value;
   jobProfile.textContent = jobInput.value;
-  closePopup(evt) 
+  closePopup(profilePopup) 
 };
 
 function handleAddCardFormSubmit(evt) {
@@ -145,13 +144,12 @@ function handleAddCardFormSubmit(evt) {
   const card = createCard(placeImgLink, placeName);
   cardPlaceContainer.prepend(card);
   closePopup(cardPopup);
-  cardTitle.value = '';
-  cardImageLink.value = '';
+  formAddCard.reset();
 };
 
-addCardButton.addEventListener('click', addNewCard);
+addCardButton.addEventListener('click', openCardPopup);
 
-editProfileButton.addEventListener('click', editProfile);
+editProfileButton.addEventListener('click', openProfilePopup);
 
 closeProfilePopupButton.addEventListener('click', function(){
   closePopup(profilePopup);
