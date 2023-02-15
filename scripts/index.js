@@ -1,6 +1,6 @@
 const profile = document.querySelector('.profile');
 
-const editProfileButton = profile.querySelector('.profile__edit-button');
+const buttonEditProfile = profile.querySelector('.profile__edit-button');
 
 const profilePopup = document.querySelector('.popup_type_profile');
  
@@ -14,7 +14,7 @@ const nameInput = profileForm.querySelector('.popup__input_type_name');
 
 const jobInput = profileForm.querySelector('.popup__input_type_job');
 
-const submitProfileButton = profileForm.querySelector('.popup__button');
+const buttonSubmitProfileForm = profileForm.querySelector('.popup__button');
 
 const template = document.querySelector('#card-template').content;
 
@@ -24,15 +24,15 @@ const cardPlaceContainer = document.querySelector('.elements');
 
 const cardPopup = document.querySelector('.popup_type_add-card');
 
-const addCardButton = profile.querySelector('.profile__add-button');
+const buttonAddCard = profile.querySelector('.profile__add-button');
 
 const cardTitle = cardPopup.querySelector('.popup__input_type_card-title');
 
 const cardImageLink = cardPopup.querySelector('.popup__input_type_card-img-link');
 
-const formAddCard = cardPopup.querySelector('.popup__form');
+const cardForm = cardPopup.querySelector('.popup__form');
 
-const submitCardButton = formAddCard.querySelector('.popup__button');
+const buttonSubmitCardForm = cardForm.querySelector('.popup__button');
 
 const imageViewPopup = document.querySelector('.popup_type_image-view');
 
@@ -75,14 +75,11 @@ function openProfilePopup() {
   openPopup(profilePopup);
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
-  enableValidation(config);
-  enableButton(submitProfileButton, config);
 };
 
 function openCardPopup() {
   openPopup(cardPopup);
-  enableValidation(config);
-  disableButton(submitCardButton, config);
+  disableButton(buttonSubmitCardForm, config);
 };
 
 function setImageClickHandler(placeImgLink, placeName) {
@@ -128,14 +125,14 @@ function handleAddCardFormSubmit(evt) {
   const card = createCard(placeImgLink, placeName);
   cardPlaceContainer.prepend(card);
   closePopup(cardPopup);
-  disableButton(submitCardButton, config)
-  formAddCard.reset();
+  disableButton(buttonSubmitCardForm, config)
+  cardForm.reset();
 };
 
 function setLayerClosePopups() {
   const popupList = document.querySelectorAll('.popup');
   popupList.forEach((popup) => {
-    popup.addEventListener('click', (evt) => {
+    popup.addEventListener('mousedown', (evt) => {
       if (evt.target === evt.currentTarget) {
         closePopup(popup);
       };
@@ -155,10 +152,12 @@ function setButtonsClosePopups() {
 
 setButtonsClosePopups();
 
-addCardButton.addEventListener('click', openCardPopup);
+enableValidation(config);
 
-editProfileButton.addEventListener('click', openProfilePopup);
+buttonAddCard.addEventListener('click', openCardPopup);
 
-formAddCard.addEventListener('submit', handleAddCardFormSubmit);
+buttonEditProfile.addEventListener('click', openProfilePopup);
+
+cardForm.addEventListener('submit', handleAddCardFormSubmit);
 
 profileForm.addEventListener('submit', handleProfileFormSubmit);

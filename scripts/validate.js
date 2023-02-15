@@ -46,11 +46,7 @@ const setInputListener = (inputList, formElement, buttonSubmitForm, config) => {
   const inputs = Array.from(inputList);
   inputList.forEach((inputElement) => {
     const errorElement = formElement.querySelector(`.${inputElement.name}-error`);
-    if (inputElement.name === 'name' || inputElement.name === 'job') {
-      checkInputValidation(inputElement, errorElement, config);
-    };
-    
-    inputElement.addEventListener('input', (evt) => {
+      inputElement.addEventListener('input', () => {
       const buttonState = hasValidityInput(inputs);
       checkInputValidation(inputElement, errorElement, config);
       toggleButtonState(buttonSubmitForm, config, buttonState);
@@ -66,4 +62,3 @@ const enableValidation = (config) => {
     setInputListener(inputList, formElement, buttonSubmitForm, config);
   });
 };
-
