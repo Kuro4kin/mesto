@@ -40,8 +40,9 @@ export class Card {
 
   createCard() {
     this.card = this._getTemplate();
-    this.card.querySelector('.card__title').textContent = this.title
-    this.card.querySelector('.card__image').src = this.image
+    this.card.querySelector('.card__title').textContent = this.title;
+    this.card.querySelector('.card__image').src = this.image;
+    this.card.querySelector('.card__image').alt =`Фотография места ${this.title}`
     this._setEventListeners(this.card);
     return this.card;
   }
