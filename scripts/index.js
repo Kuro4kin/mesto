@@ -1,3 +1,43 @@
+import { Card } from './Card.js';
+
+import { FormValidator } from './FormValidator.js'
+
+const renderCardsInfo = [
+  {
+    placeName: 'Архыз',
+    placeImgLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    placeName: 'Челябинская область',
+    placeImgLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    placeName: 'Иваново',
+    placeImgLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    placeName: 'Камчатка',
+    placeImgLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    placeName: 'Холмогорский район',
+    placeImgLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    placeName: 'Байкал',
+    placeImgLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+]; 
+
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+}; 
+
 const profile = document.querySelector('.profile');
 
 const buttonEditProfile = profile.querySelector('.profile__edit-button');
@@ -40,19 +80,7 @@ const modalImg = imageViewPopup.querySelector('.popup__image');
 
 const modalSubtitle = imageViewPopup.querySelector('.popup__subtitle');
 
-function setCardDelete(cardElement) {
-  const cardDeleteButton = cardElement.querySelector('.card__button-delete');
-  cardDeleteButton.addEventListener('click', function() {
-    cardDeleteButton.closest('.card').remove();
-  })
-};
-
-function setCardLike(cardElement) {
-  const cardLikeButton = cardElement.querySelector('.card__button-like');
-  cardLikeButton.addEventListener('click', function() {
-    cardLikeButton.classList.toggle('card__button-like_active');
-  })
-};
+const cardTemplateSelector = '#card-template'
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -90,24 +118,18 @@ function setImageClickHandler(placeImgLink, placeName) {
 };
 
 function createCard(placeImgLink, placeName) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImageElement = cardElement.querySelector('.card__image');
-  const cardTitleElement = cardElement.querySelector('.card__title');
-  cardImageElement.src = placeImgLink;
-  cardImageElement.alt = `Фотография из места ${placeName}`;
-  cardTitleElement.textContent = placeName;
-  setCardDelete(cardElement);
-  setCardLike(cardElement);
-  cardImageElement.addEventListener('click', () => setImageClickHandler(placeImgLink, placeName));
+  const card = new Card(placeName, placeImgLink, cardTemplateSelector, setImageClickHandler);
+  const cardElement = card.createCard();
   return cardElement;
 }
 
 function renderCards() {
-  renderCardsInfo.forEach(function(item) { 
-    const card = createCard(item.placeImgLink, item.placeName);
-    cardPlaceContainer.append(card);
+  renderCardsInfo.forEach((item) => {
+    const card = new Card(item.placeName, item.placeImgLink, cardTemplateSelector, setImageClickHandler);
+    const cardElement = card.createCard();
+    cardPlaceContainer.append(cardElement);
   });
-};
+}
 
 renderCards();
 
@@ -115,7 +137,7 @@ function handleProfileFormSubmit(evt) {
   evt.preventDefault(); 
   nameProfile.textContent = nameInput.value;
   jobProfile.textContent = jobInput.value;
-  closePopup(profilePopup) 
+  closePopup(profilePopup);
 };
 
 function handleAddCardFormSubmit(evt) {
@@ -125,7 +147,7 @@ function handleAddCardFormSubmit(evt) {
   const card = createCard(placeImgLink, placeName);
   cardPlaceContainer.prepend(card);
   closePopup(cardPopup);
-  disableButton(buttonSubmitCardForm, config)
+  disableButton(buttonSubmitCardForm, config);
   cardForm.reset();
 };
 
@@ -152,7 +174,15 @@ function setButtonsClosePopups() {
 
 setButtonsClosePopups();
 
-enableValidation(config);
+function setFormValidation(config) {
+  const formList = document.querySelectorAll(config.formSelector);
+  formList.forEach((item) => {
+    const formElement = new FormValidator(config, item);
+    formElement.enableValidation();
+  });
+};
+
+setFormValidation(config);
 
 buttonAddCard.addEventListener('click', openCardPopup);
 
