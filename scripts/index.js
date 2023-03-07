@@ -40,9 +40,9 @@ const modalSubtitle = imageViewPopup.querySelector('.popup__subtitle');
 
 const cardTemplateSelector = '#card-template'
 
-const profileFormValidator = new FormValidator(validationConfig, profilePopup);
+const profileFormValidator = new FormValidator(validationConfig, profileForm);
 
-const cardFormValidator = new FormValidator(validationConfig, cardPopup);
+const cardFormValidator = new FormValidator(validationConfig, cardForm);
 
 profileFormValidator.enableValidation();
 
