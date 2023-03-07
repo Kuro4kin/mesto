@@ -1,42 +1,8 @@
 import { Card } from './Card.js';
 
-import { FormValidator } from './FormValidator.js'
+import { FormValidator } from './FormValidator.js';
 
-const renderCardsInfo = [
-  {
-    placeName: 'Архыз',
-    placeImgLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    placeName: 'Челябинская область',
-    placeImgLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    placeName: 'Иваново',
-    placeImgLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    placeName: 'Камчатка',
-    placeImgLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    placeName: 'Холмогорский район',
-    placeImgLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    placeName: 'Байкал',
-    placeImgLink: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-]; 
-
-const config = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-}; 
+import { renderCardsInfo, validationConfig } from './constant.js';
 
 const profile = document.querySelector('.profile');
 
@@ -54,12 +20,6 @@ const nameInput = profileForm.querySelector('.popup__input_type_name');
 
 const jobInput = profileForm.querySelector('.popup__input_type_job');
 
-const buttonSubmitProfileForm = profileForm.querySelector('.popup__button');
-
-const template = document.querySelector('#card-template').content;
-
-const cardTemplate = template.querySelector('.card');
-
 const cardPlaceContainer = document.querySelector('.elements');
 
 const cardPopup = document.querySelector('.popup_type_add-card');
@@ -72,8 +32,6 @@ const cardImageLink = cardPopup.querySelector('.popup__input_type_card-img-link'
 
 const cardForm = cardPopup.querySelector('.popup__form');
 
-const buttonSubmitCardForm = cardForm.querySelector('.popup__button');
-
 const imageViewPopup = document.querySelector('.popup_type_image-view');
 
 const modalImg = imageViewPopup.querySelector('.popup__image');
@@ -81,6 +39,16 @@ const modalImg = imageViewPopup.querySelector('.popup__image');
 const modalSubtitle = imageViewPopup.querySelector('.popup__subtitle');
 
 const cardTemplateSelector = '#card-template'
+
+const profileFormValidator = new FormValidator(validationConfig, profilePopup);
+
+const cardFormValidator = new FormValidator(validationConfig, cardPopup);
+
+profileFormValidator.enableValidation();
+
+cardFormValidator.enableValidation();
+
+cardFormValidator.disableButton();
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -107,10 +75,9 @@ function openProfilePopup() {
 
 function openCardPopup() {
   openPopup(cardPopup);
-  disableButton(buttonSubmitCardForm, config);
 };
 
-function setImageClickHandler(placeImgLink, placeName) {
+function handleCardImageClick(placeImgLink, placeName) {
   modalImg.src = placeImgLink;
   modalImg.alt = `Фотография из места ${placeName}`;
   modalSubtitle.textContent = placeName;
@@ -118,15 +85,14 @@ function setImageClickHandler(placeImgLink, placeName) {
 };
 
 function createCard(placeImgLink, placeName) {
-  const card = new Card(placeName, placeImgLink, cardTemplateSelector, setImageClickHandler);
+  const card = new Card(placeName, placeImgLink, cardTemplateSelector, handleCardImageClick);
   const cardElement = card.createCard();
   return cardElement;
 }
 
 function renderCards() {
   renderCardsInfo.forEach((item) => {
-    const card = new Card(item.placeName, item.placeImgLink, cardTemplateSelector, setImageClickHandler);
-    const cardElement = card.createCard();
+    const cardElement = createCard(item.placeImgLink, item.placeName);
     cardPlaceContainer.append(cardElement);
   });
 }
@@ -147,7 +113,6 @@ function handleAddCardFormSubmit(evt) {
   const card = createCard(placeImgLink, placeName);
   cardPlaceContainer.prepend(card);
   closePopup(cardPopup);
-  disableButton(buttonSubmitCardForm, config);
   cardForm.reset();
 };
 
@@ -173,16 +138,6 @@ function setButtonsClosePopups() {
 };
 
 setButtonsClosePopups();
-
-function setFormValidation(config) {
-  const formList = document.querySelectorAll(config.formSelector);
-  formList.forEach((item) => {
-    const formElement = new FormValidator(config, item);
-    formElement.enableValidation();
-  });
-};
-
-setFormValidation(config);
 
 buttonAddCard.addEventListener('click', openCardPopup);
 

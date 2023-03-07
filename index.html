@@ -19,9 +19,9 @@
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
                 <p class="profile__job">Исследователь океана</p>
               </div>
-              <button type="button" class="profile__edit-button"></button>
+              <button aria-label="Add" type="button" class="profile__edit-button"></button>
           </div>
-          <button type="button" class="profile__add-button"></button>
+          <button aria-label="Add" type="button" class="profile__add-button"></button>
         </section>
         <section class="section-elements">
           <ul class="elements">
@@ -33,7 +33,7 @@
       </footer>
       <div class="popup popup_type_profile">
         <div class="popup__container">
-          <button type="button" class="popup__close-button"></button>
+          <button aria-label="Close" type="button" class="popup__close-button"></button>
           <h2 class="popup__title">Редактировать профиль</h2>
           <form name="profile-info" method="get" action="#" class="popup__form" novalidate>
             <input 
@@ -62,7 +62,7 @@
       </div>
       <div class="popup popup_type_add-card">
         <div class="popup__container">
-          <button type="button" class="popup__close-button"></button>
+          <button aria-label="Close" type="button" class="popup__close-button"></button>
           <h2 class="popup__title">Новое место</h2>
           <form name="card-add" method="get" action="#" class="popup__form" novalidate>
             <input 
@@ -72,16 +72,14 @@
               maxlength="30" 
               required 
               class="popup__input popup__input_type_card-title" 
-              placeholder="Название" 
-              value="">
+              placeholder="Название">
             <span class="popup__error card-title-error"></span>
             <input 
               name="card-image-link" 
               type="url" 
               required 
               class="popup__input popup__input_type_card-img-link" 
-              placeholder="Ссылка на картинку" 
-              value="">
+              placeholder="Ссылка на картинку">
             <span class="popup__error card-image-link-error"></span>
             <button type="submit" class="popup__button">Создать</button>
           </form>
@@ -89,7 +87,7 @@
       </div>
       <div class="popup popup_type_image-view">
         <div class="popup__wrapper-image">
-          <button type="button" class="popup__close-button"></button>
+          <button aria-label="Close" type="button" class="popup__close-button"></button>
           <img class="popup__image" alt="">
           <p class = "popup__subtitle"></p>
         </div>
@@ -107,7 +105,5 @@
     </li>
   </template>
   <script type="module" src="./scripts/index.js"></script>
-  <script type="module" src="./scripts/Card.js"></script>
-  <script type="module" src="./scripts/FormValidator.js"></script>
 </body>
 </html>
