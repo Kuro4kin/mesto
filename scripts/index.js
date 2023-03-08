@@ -48,8 +48,6 @@ profileFormValidator.enableValidation();
 
 cardFormValidator.enableValidation();
 
-cardFormValidator.disableButton();
-
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', checkKeyClosePopup);
@@ -74,6 +72,7 @@ function openProfilePopup() {
 };
 
 function openCardPopup() {
+  cardFormValidator.disableButton();
   openPopup(cardPopup);
 };
 

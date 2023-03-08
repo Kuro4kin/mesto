@@ -3,7 +3,11 @@ export class Card {
     this._title = title;
     this._imageLink = imageLink;
     this._templateSelector = templateSelector;
-    this.handleCardImageClick = handleCardImageClick;
+    this._handleCardImageClick = handleCardImageClick;
+    this._card = this._getTemplate();
+    this._cardTitleElement = this._card.querySelector('.card__title');
+    this._cardImageElement = this._card.querySelector('.card__image');
+    this._cardLikeButton = this._card.querySelector('.card__button-like');
   }
 
   _getTemplate() {
@@ -16,35 +20,30 @@ export class Card {
   }
 
   _setEventListeners() {
-    const cardLikeButton = this._card.querySelector('.card__button-like');
     const cardDeleteButton = this._card.querySelector('.card__button-delete');
-    const cardImage = this._card.querySelector('.card__image');
     cardDeleteButton.addEventListener('click', ()=>{
       this._handleCardDelete();
     });
-    cardImage.addEventListener('click', ()=>{
-      this.handleCardImageClick(this._imageLink, this._title);
+    this._cardImageElement.addEventListener('click', ()=>{
+      this._handleCardImageClick(this._imageLink, this._title);
     });
-    cardLikeButton.addEventListener('click', ()=>{
-      this._handleCardLike(cardLikeButton);
+    this._cardLikeButton.addEventListener('click', ()=>{
+      this._handleCardLike();
     });
   }
 
-  _handleCardLike(cardLikeButton) {
-    cardLikeButton.classList.toggle('card__button-like_active');
+  _handleCardLike() {
+    this._cardLikeButton.classList.toggle('card__button-like_active');
   }
 
   _handleCardDelete() {
     this._card.remove();
   }
 
-  createCard() {
-    this._card = this._getTemplate();
-    const cardTitleElement = this._card.querySelector('.card__title');
-    const cardImageElement = this._card.querySelector('.card__image')
-    cardTitleElement.textContent = this._title;
-    cardImageElement.src = this._imageLink;
-    cardImageElement.alt =`Фотография места ${this.title}`
+  createCard=()=> {
+    this._cardTitleElement.textContent = this._title;
+    this._cardImageElement.src = this._imageLink;
+    this._cardImageElement.alt =`Фотография места ${this.title}`
     this._setEventListeners(this._card);
     return this._card;
   }
