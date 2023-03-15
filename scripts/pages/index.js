@@ -1,8 +1,10 @@
-import { Card } from './Card.js';
+import Card from '../components/Card.js';
 
-import { FormValidator } from './FormValidator.js';
+import FormValidator from '../components/FormValidator.js';
 
-import { renderCardsInfo, validationConfig } from './constant.js';
+import Section from '../components/Section.js';
+
+import { renderCardsInfo, validationConfig } from '../utils/constant.js';
 
 const profile = document.querySelector('.profile');
 
@@ -38,7 +40,9 @@ const modalImg = imageViewPopup.querySelector('.popup__image');
 
 const modalSubtitle = imageViewPopup.querySelector('.popup__subtitle');
 
-const cardTemplateSelector = '#card-template'
+const cardTemplateSelector = '#card-template';
+
+const containerSelector = '.elements'
 
 const profileFormValidator = new FormValidator(validationConfig, profileForm);
 
@@ -47,6 +51,17 @@ const cardFormValidator = new FormValidator(validationConfig, cardForm);
 profileFormValidator.enableValidation();
 
 cardFormValidator.enableValidation();
+
+const cardList = new Section(
+  { item: renderCardsInfo,
+    renderer: (item) => {
+      const card = new Card(item.placeName, item.placeImgLink, cardTemplateSelector, handleCardImageClick);
+      const cardElement = card.createCard();
+      cardList.addItem(cardElement);
+    }
+  }, containerSelector);
+
+cardList.renderItem();
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -88,15 +103,6 @@ function createCard(placeImgLink, placeName) {
   const cardElement = card.createCard();
   return cardElement;
 }
-
-function renderCards() {
-  renderCardsInfo.forEach((item) => {
-    const cardElement = createCard(item.placeImgLink, item.placeName);
-    cardPlaceContainer.append(cardElement);
-  });
-}
-
-renderCards();
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault(); 
