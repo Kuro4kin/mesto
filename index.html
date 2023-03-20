@@ -66,21 +66,21 @@
           <h2 class="popup__title">Новое место</h2>
           <form name="card-add" method="get" action="#" class="popup__form" novalidate>
             <input 
-              name="card-title" 
+              name="title" 
               type="text" 
               minlength="2" 
               maxlength="30" 
               required 
               class="popup__input popup__input_type_card-title" 
               placeholder="Название">
-            <span class="popup__error card-title-error"></span>
+            <span class="popup__error title-error"></span>
             <input 
-              name="card-image-link" 
+              name="link" 
               type="url" 
               required 
               class="popup__input popup__input_type_card-img-link" 
               placeholder="Ссылка на картинку">
-            <span class="popup__error card-image-link-error"></span>
+            <span class="popup__error link-error"></span>
             <button type="submit" class="popup__button">Создать</button>
           </form>
         </div>
