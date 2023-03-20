@@ -26,7 +26,6 @@ const containerSelector = '.elements';
 
 export {
   buttonEditProfile,
-  profilePopup,
   profileForm,
   nameInput,
   jobInput,

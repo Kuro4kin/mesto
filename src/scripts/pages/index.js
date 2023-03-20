@@ -1,3 +1,5 @@
+import '../../pages/index.css';
+
 import Card from '../components/Card.js';
 
 import FormValidator from '../components/FormValidator.js';
@@ -14,7 +16,6 @@ import UserInfo from '../components/UserInfo.js';
 
 import {
   buttonEditProfile,
-  profilePopup,
   profileForm,
   nameInput,
   jobInput,
@@ -37,6 +38,7 @@ cardFormValidator.enableValidation();
 
 function handleCardImageClick(placeImgLink, placeName) {
   previewImagePopup.open(placeImgLink, placeName);
+  previewImagePopup.setEventListeners();
 };
 
 const cardList = new Section({ 
