@@ -42,6 +42,14 @@ export default class FormValidator {
     this._formSubmitButton.setAttribute('disabled', 'disabled');
   }
 
+  resetValidation() {
+    this._toggleButtonState();
+    this._inputList.forEach((inputElement) => {
+      const errorElement = this.formElement.querySelector(`.${inputElement.name}-error`);
+      this._hideInputError(errorElement, inputElement);
+    });
+  }
+
   _toggleButtonState(buttonState) {
     if (buttonState) {
       this._enableButton();
