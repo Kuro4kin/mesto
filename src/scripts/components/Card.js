@@ -44,7 +44,7 @@ export default class Card {
     this._cardTitleElement.textContent = this._title;
     this._cardImageElement.src = this._imageLink;
     this._cardImageElement.alt =`Фотография места ${this.title}`
-    this._setEventListeners(this._card);
+    this._setEventListeners();
     return this._card;
   }
 };

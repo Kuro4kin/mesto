@@ -17,6 +17,12 @@ import { validationConfig } from '../utils/constant.js';
     return this._formValues;
   }
 
+  setInputValues(data) {
+    this._inputList.forEach((input) => {
+      input.value = data[input.name]
+    })
+  }
+
   setEventListeners() {
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
