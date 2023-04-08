@@ -24,11 +24,11 @@ import { validationConfig } from '../utils/constant.js';
   }
 
   setEventListeners() {
+    const submitButton = this._element.querySelector(validationConfig.submitButtonSelector);
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._getInputValues()
-      this._handleFormSubmit(this._formValues);
-      this.close();
+      this._handleFormSubmit(this._formValues, submitButton);
     });
     return super.setEventListeners()
   }
