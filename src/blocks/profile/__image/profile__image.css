@@ -1,8 +1,9 @@
 .profile__image {
   width: 121px;
   height: 121px;
-  background-size: cover;
+  object-fit: cover;
   border-radius: 100%;
+  position: relative;
 }
 
 @media (max-width: 800px) {

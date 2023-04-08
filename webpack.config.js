@@ -15,7 +15,7 @@ module.exports = {
   devServer: {
     static: path.resolve(__dirname, './dist'),
     compress: true,
-    port: 8089,
+    port: 8082,
     open: true
   },
   module: {
