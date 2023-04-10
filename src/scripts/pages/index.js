@@ -77,7 +77,7 @@ function createCard(data) {
       comfirmDeletePopup.setSubmitAction(() => {
         api.removeThisCard(card)
           .then(() => {
-            card.remove();
+            card.removeCard();
             comfirmDeletePopup.close();
           })
           .catch((err) => {
@@ -128,8 +128,8 @@ const comfirmDeletePopup = new PopupConfirmAction(confirmActionPopupSelector);
 comfirmDeletePopup.setEventListeners();
 
 const addCardPopup = new PopupWithForm(addCardPopupSelector, {
-  handleFormSubmit: (data, submitButton) => {
-    submitButton.textContent = 'Сохранение...';
+  handleFormSubmit: (data) => {
+    addCardPopup.changeButtonText(true);
     api.createNewCard(data)
       .then((cardInfo) => {
         const cardElement = createCard(cardInfo);
@@ -140,7 +140,7 @@ const addCardPopup = new PopupWithForm(addCardPopupSelector, {
         console.log(`Произошла ошибка ${err}`)
       })
       .finally(() => {
-        submitButton.textContent = 'Сохранить'
+        addCardPopup.changeButtonText(false);
       })
   }
 });
@@ -148,8 +148,8 @@ const addCardPopup = new PopupWithForm(addCardPopupSelector, {
 addCardPopup.setEventListeners()
 
 const editProfilePopup = new PopupWithForm(editProfilePopupSelector, {
-  handleFormSubmit: (data, submitButton) => {
-    submitButton.textContent = 'Сохранение...';
+  handleFormSubmit: (data) => {
+    editProfilePopup.changeButtonText(true);
     api.editUserInfo(data)
       .then((userInfo) => {
         profileInfo.setUserInfo(userInfo);
@@ -159,7 +159,7 @@ const editProfilePopup = new PopupWithForm(editProfilePopupSelector, {
         console.log(`Ошибка ${err}`);
       })
       .finally(() => {
-        submitButton.textContent = 'Сохранить'
+        editProfilePopup.changeButtonText(false);
       })
   }
 });
@@ -167,8 +167,8 @@ const editProfilePopup = new PopupWithForm(editProfilePopupSelector, {
 editProfilePopup.setEventListeners(); 
 
 const editAvatarPopup = new PopupWithForm(editAvatarPopupSelector, {
-  handleFormSubmit: (data, submitButton) => {
-    submitButton.textContent = 'Сохранение...';
+  handleFormSubmit: (data) => {
+    editAvatarPopup.changeButtonText(true);
     api.editUserAvatar(data)
       .then((userInfo) => {
         profileInfo.setUserInfo(userInfo);
@@ -178,7 +178,7 @@ const editAvatarPopup = new PopupWithForm(editAvatarPopupSelector, {
         console.log(`Ошибка ${err}`);
       })
       .finally(() => {
-        submitButton.textContent = 'Сохранить'
+        editAvatarPopup.changeButtonText(false);
       })
     }
 });
