@@ -3,6 +3,14 @@ export default class Api {
     this._config = config;
   }
 
+  _getResponseData(res) {
+    if (!res.ok) {
+      Promise.reject(res.status);
+    } else {
+      return res.json();
+    }
+  }
+
   getInitialUserInfo() {
     return fetch(this._config.user, {
       method: 'GET',
@@ -11,14 +19,7 @@ export default class Api {
       }
     })
     .then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(res.status);
-      }
-    })
-    .catch((err) => {
-      console.log(`Ошибка загрузки данных профиля ${err}`)
+      return this._getResponseData(res) 
     })
   }
 
@@ -30,14 +31,7 @@ export default class Api {
       }
     })
     .then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(res.status);
-      }
-    })
-    .catch((err) => {
-      console.log(`Ошибка загрузки карточек ${err}`)
+      return this._getResponseData(res) 
     })
   }
 
@@ -54,11 +48,7 @@ export default class Api {
       }),
     })
     .then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        Promise.reject(res.status);
-      }
+      return this._getResponseData(res) 
     })
   }
 
@@ -74,11 +64,7 @@ export default class Api {
       }),
     })
     .then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        Promise.reject(res.status);
-      }
+      return this._getResponseData(res) 
     })
   }
 
@@ -95,11 +81,7 @@ export default class Api {
       })
     })
     .then((res) => {
-      if (res.ok) {
-        return res.json()
-      } else {
-        Promise.reject(res.status)
-      }
+      return this._getResponseData(res) 
     })
   }
 
@@ -112,11 +94,7 @@ export default class Api {
       }
     })
     .then((res) => {
-      if (res.ok) {
-        return res.json()
-      } else {
-        Promise.reject(res.status)
-      }
+      return this._getResponseData(res) 
     })
   }
 
@@ -129,11 +107,7 @@ export default class Api {
       }
     })
     .then((res) => {
-      if (res.ok) {
-        return res.json()
-      } else {
-        Promise.reject(res.status)
-      }
+      return this._getResponseData(res) 
     })
   }
 
@@ -146,11 +120,7 @@ export default class Api {
       }
     })
     .then((res) => {
-      if (res.ok) {
-        return res.json()
-      } else {
-        Promise.reject(res.status)
-      }
+      return this._getResponseData(res) 
     })
   }
 }

@@ -27,7 +27,7 @@ export default class Card {
     return cardElement;
   }
 
-  remove() {
+  removeCard() {
     this._card.remove();
   }
 

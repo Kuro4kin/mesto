@@ -7,6 +7,7 @@ import { validationConfig } from '../utils/constant.js';
     this._handleFormSubmit = handleFormSubmit;
     this._form = this._element.querySelector(validationConfig.formSelector);
     this._inputList = this._element.querySelectorAll(validationConfig.inputSelector);
+    this._submitButton = this._element.querySelector(validationConfig.submitButtonSelector);
   }
 
   _getInputValues() {
@@ -23,12 +24,20 @@ import { validationConfig } from '../utils/constant.js';
     })
   }
 
+  changeButtonText(isLoading) {
+    if(isLoading) {
+      this._submitButton.textContent = 'Загрузка...';
+    } else {
+      this._submitButton.textContent = 'Сохранить';
+    }
+
+  }
+
   setEventListeners() {
-    const submitButton = this._element.querySelector(validationConfig.submitButtonSelector);
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._getInputValues()
-      this._handleFormSubmit(this._formValues, submitButton);
+      this._handleFormSubmit(this._formValues);
     });
     return super.setEventListeners()
   }
